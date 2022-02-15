@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'static#index'
 
@@ -7,7 +9,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '*page', to: 'static#index', constraints: ->(req) do
+  get '*page', to: 'static#index', constraints: lambda { |req|
     !req.xhr? && req.format.html?
-  end
+  }
 end
